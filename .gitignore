@@ -1,0 +1,16 @@
+releases/*
+*.biprivatekey
+keys/*
+.hemtt/local
+*.cache
+*.pbo
+texHeaders.bin
+*.swp
+*.swo
+Thumbs.db
+*.bisign
+*.tar.gz
+*.zip
+hemtt*
+!hemtt.toml
+tools/armake.exe

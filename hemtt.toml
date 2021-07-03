@@ -1,0 +1,11 @@
+name = "Timber Corp Zeus Additions"
+prefix = "timberZA"
+author = "Geelik"
+mainprefix = "x"
+files = [
+    "mod.cpp",
+    "LICENSE",
+    "AUTHORS.txt",
+    "README.md",
+    "meta.cpp"
+]
