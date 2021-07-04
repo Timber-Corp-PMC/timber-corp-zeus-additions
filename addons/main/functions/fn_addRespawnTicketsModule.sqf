@@ -17,16 +17,16 @@ private _opforTicketCount = missionNamespace getVariable [QGVAR(OpforTicketCount
 private _indepTicketCount = missionNamespace getVariable [QGVAR(IndepTicketCount), -1];
 private _civilianTicketCount = missionNamespace getVariable [QGVAR(CivilianforTicketCount), -1];
 
-private _bluforInput = _display displayCtrl IDC_RESPAWN_TICKETS_BLUFOR_INPUT;
+private _bluforInput = _display displayCtrl IDC_RESPAWN_TICKETS_BLUFORINPUT;
 _bluforInput ctrlSetText (str _bluforTicketCount);
 
-private _opforInput = _display displayCtrl IDC_RESPAWN_TICKETS_OPFOR_INPUT;
+private _opforInput = _display displayCtrl IDC_RESPAWN_TICKETS_OPFORINPUT;
 _opforInput ctrlSetText (str _opforTicketCount);
 
-private _indepInput = _display displayCtrl IDC_RESPAWN_TICKETS_INDEP_INPUT;
+private _indepInput = _display displayCtrl IDC_RESPAWN_TICKETS_INDEPINPUT;
 _indepInput ctrlSetText (str _indepTicketCount);
 
-private _civInput = _display displayCtrl IDC_RESPAWN_TICKETS_CIV_INPUT;
+private _civInput = _display displayCtrl IDC_RESPAWN_TICKETS_CIVINPUT;
 _civInput ctrlSetText (str _civilianTicketCount);
 
 private _ctrlButtonCancel = _display displayCtrl IDC_CANCEL;
@@ -42,16 +42,16 @@ _ctrlButtonOK ctrlAddEventHandler ["ButtonClick", {
 
     private _display = ctrlParent _ctrlButtonOK;
 
-	private _bluforInput = _display displayCtrl IDC_RESPAWN_TICKETS_BLUFOR_INPUT;
+	private _bluforInput = _display displayCtrl IDC_RESPAWN_TICKETS_BLUFORINPUT;
 	missionNamespace setVariable [QGVAR(BluforTicketCount), parseNumber ctrlText _bluforInput];
 
-	private _opforInput = _display displayCtrl IDC_RESPAWN_TICKETS_OPFOR_INPUT;
+	private _opforInput = _display displayCtrl IDC_RESPAWN_TICKETS_OPFORINPUT;
 	missionNamespace setVariable [QGVAR(OpforTicketCount), parseNumber ctrlText _opforInput];
 
-	private _indepInput = _display displayCtrl IDC_RESPAWN_TICKETS_INDEP_INPUT;
+	private _indepInput = _display displayCtrl IDC_RESPAWN_TICKETS_INDEPINPUT;
 	missionNamespace setVariable [QGVAR(IndepTicketCount), parseNumber ctrlText _indepInput];
 
-	private _civInput = _display displayCtrl IDC_RESPAWN_TICKETS_CIV_INPUT;
+	private _civInput = _display displayCtrl IDC_RESPAWN_TICKETS_CIVINPUT;
 	missionNamespace setVariable [QGVAR(CivilianforTicketCount), parseNumber ctrlText _civInput];
 
 	_display closeDisplay IDC_OK;
