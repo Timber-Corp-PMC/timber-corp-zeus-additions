@@ -25,9 +25,27 @@ private _wait = [player] spawn
 		false;
 	};
 
-	private _moduleList = [
-		["Add respawn tickets", {_this call timberZA_main_fnc_addRespawnTicketsModule}, "\a3\modules_f\data\portraitmodule_ca.paa"]
-	];
+	private _moduleList = [];
+
+	//Add the editRespawnTicketModule only if we detect it's used	
+	private _respawnSystemUsed = [] call {
+		private _bluforTicketCount = missionNamespace getVariable QGVAR(BluforTicketCount);
+		private _opforTicketCount = missionNamespace getVariable QGVAR(OpforTicketCount);
+		private _indepTicketCount = missionNamespace getVariable QGVAR(IndepTicketCount);
+		private _civilianTicketCount = missionNamespace getVariable QGVAR(CivilianforTicketCount);
+
+		private _respawnSystemUsed = (
+			!isNil QUOTE(_bluforTicketCount)
+			|| !isNil QUOTE(OpforTicketCount)
+			|| !isNil QUOTE(IndepTicketCount)
+			|| !isNil QUOTE(CivilianforTicketCount)
+		);
+		_respawnSystemUsed;
+	};
+
+	if (_respawnSystemUsed) then {
+		_moduleList pushBack ["Edit respawn tickets", {_this call timberZA_main_fnc_editRespawnTicketsModule}, "\a3\modules_f\data\portraitmodule_ca.paa"];
+	};
 
 	//registering ZEN custom modules
 	{

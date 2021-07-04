@@ -1,4 +1,4 @@
-# addRespawnTicketModule
+# addRespawnTicketsModule
 
 This module help you create and manage a custom tickets respawn system.
 
@@ -12,6 +12,8 @@ You have 4 field, one per side. Each field corresponds to one variable inside th
 - Opfor = `timberZA_main_OpforTicketCount`
 - Independent = `timberZA_main_IndepTicketCount`
 - Civilian = `timberZA_main_CivilianforTicketCount`
+
+**Inputs will be disabled if the corresponding missionNamespace variables aren't defined in the mission files. If none of the variables are defined, the module will not be available in the zeus interface.**
 
 ### Get current ticket count
 
