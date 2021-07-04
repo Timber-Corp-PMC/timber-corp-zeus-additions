@@ -1,3 +1,6 @@
+#include "\a3\ui_f\hpp\defineCommonGrids.inc"
+#include "\a3\ui_f\hpp\defineDIKCodes.inc"
+#include "\a3\ui_f_curator\ui\defineResinclDesign.inc"
 #include "script_component.hpp"
 
 class CfgPatches {
