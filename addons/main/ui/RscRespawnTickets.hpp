@@ -1,123 +1,124 @@
 class GVAR(RscRespawnTickets)
 {
-	idd = IDD_RESPAWN_TICKETS;
+	idd = -1;
 	onLoad = "uiNamespace setVariable ['timberZA_main_RscRespawnTicketsDisplay',_this select 0];";
+	movingEnable = 1;
 
 	class controls {
+        class Title: RscText {
+            idc = IDC_TITLE;
+			h = POS_H(1);
+			w = POS_W(20);
+			x = POS_X(6.5);
+			y = POS_Y(0);
+            colorBackground[] = GUI_THEME_COLOR;
+            moving = 1;
+            text = "Edit respawn tickets";
+        };
 
-		////////////////////////////////////////////////////////
-		// GUI EDITOR OUTPUT START (by Geelik, v1.063, #Miqipo)
-		////////////////////////////////////////////////////////
+		class Background: RscText {
+			idc = IDC_BACKGROUND;
+			h = POS_H(10);
+			w = POS_W(20);
+			x = POS_X(6.5);
+			y = POS_Y(0);
+			colorBackground[] = {0, 0, 0, 0.7};
+		};
 
-		class Background: RscText
-		{
-			idc = IDC_RESPAWN_TICKETS_BACKGROUND;
-			x = 12 * GUI_GRID_CENTER_W + GUI_GRID_CENTER_X;
-			y = 3 * GUI_GRID_CENTER_H + GUI_GRID_CENTER_Y;
-			w = 13.5 * GUI_GRID_CENTER_W;
-			h = 11.5 * GUI_GRID_CENTER_H;
-			colorBackground[] = {0,0,0,0.7};
-		};
-		class ButtonOk: RscButtonMenuOK
-		{
-			idc = IDC_OK;
-			x = 21 * GUI_GRID_CENTER_W + GUI_GRID_CENTER_X;
-			y = 13 * GUI_GRID_CENTER_H + GUI_GRID_CENTER_Y;
-			w = 3.5 * GUI_GRID_CENTER_W;
-			h = 1 * GUI_GRID_CENTER_H;
-		};
-		class ButtonCancel: RscButtonMenuCancel
-		{
-			idc = IDC_CANCEL;
-			x = 16.5 * GUI_GRID_CENTER_W + GUI_GRID_CENTER_X;
-			y = 13 * GUI_GRID_CENTER_H + GUI_GRID_CENTER_Y;
-			w = 3.5 * GUI_GRID_CENTER_W;
-			h = 1 * GUI_GRID_CENTER_H;
-		};
-		class Title: RscText
-		{
-			idc = IDC_RESPAWN_TICKETS_TITLE;
-			x = 12 * GUI_GRID_CENTER_W + GUI_GRID_CENTER_X;
-			y = 3 * GUI_GRID_CENTER_H + GUI_GRID_CENTER_Y;
-			w = 13.5 * GUI_GRID_CENTER_W;
-			h = 1 * GUI_GRID_CENTER_H;
+		class Content: RscControlsGroupNoScrollbars {
+			idc = IDC_CONTENT;
+			h = POS_H(10);
+			w = POS_W(20);
+			x = POS_X(6.5);
+			y = POS_Y(0);
 			
-			colorText[] = {0.95,0.95,0.95,1};
-			colorBackground[] = GUI_THEME_COLOR;
-			text = "Edit respawn tickets"; //--- ToDo: Localize;
-		};
-		class BluforInput: RscEdit
-		{
-			idc = IDC_RESPAWN_TICKETS_BLUFORINPUT;
-			x = 20 * GUI_GRID_CENTER_W + GUI_GRID_CENTER_X;
-			y = 5 * GUI_GRID_CENTER_H + GUI_GRID_CENTER_Y;
-			w = 4.5 * GUI_GRID_CENTER_W;
-			h = 1 * GUI_GRID_CENTER_H;
-		};
-		class OpforInput: RscEdit
-		{
-			idc = IDC_RESPAWN_TICKETS_OPFORINPUT;
-			x = 20 * GUI_GRID_CENTER_W + GUI_GRID_CENTER_X;
-			y = 7 * GUI_GRID_CENTER_H + GUI_GRID_CENTER_Y;
-			w = 4.5 * GUI_GRID_CENTER_W;
-			h = 1 * GUI_GRID_CENTER_H;
-		};
-		class IndepInput: RscEdit
-		{
-			idc = IDC_RESPAWN_TICKETS_INDEPINPUT;
-			x = 20 * GUI_GRID_CENTER_W + GUI_GRID_CENTER_X;
-			y = 9 * GUI_GRID_CENTER_H + GUI_GRID_CENTER_Y;
-			w = 4.5 * GUI_GRID_CENTER_W;
-			h = 1 * GUI_GRID_CENTER_H;
-		};
-		class CivInput: RscEdit
-		{
-			idc = IDC_RESPAWN_TICKETS_CIVINPUT;
-			x = 20 * GUI_GRID_CENTER_W + GUI_GRID_CENTER_X;
-			y = 11 * GUI_GRID_CENTER_H + GUI_GRID_CENTER_Y;
-			w = 4.5 * GUI_GRID_CENTER_W;
-			h = 1 * GUI_GRID_CENTER_H;
-		};
-		class BluforLabel: RscText
-		{
-			idc = IDC_RESPAWN_TICKETS_BLUFORLABEL;
-			x = 13 * GUI_GRID_CENTER_W + GUI_GRID_CENTER_X;
-			y = 5 * GUI_GRID_CENTER_H + GUI_GRID_CENTER_Y;
-			w = 6 * GUI_GRID_CENTER_W;
-			h = 1 * GUI_GRID_CENTER_H;
-			text = "BLUFOR tickets"; //--- ToDo: Localize;
-		};
-		class OpforLabel: RscText
-		{
-			idc = IDC_RESPAWN_TICKETS_OPFORLABEL;
-			x = 13 * GUI_GRID_CENTER_W + GUI_GRID_CENTER_X;
-			y = 7 * GUI_GRID_CENTER_H + GUI_GRID_CENTER_Y;
-			w = 6 * GUI_GRID_CENTER_W;
-			h = 1 * GUI_GRID_CENTER_H;
-			text = "OPFOR tickets"; //--- ToDo: Localize;
-		};
-		class IndepLabel: RscText
-		{
-			idc = IDC_RESPAWN_TICKETS_INDEPLABEL;
-			x = 13 * GUI_GRID_CENTER_W + GUI_GRID_CENTER_X;
-			y = 9 * GUI_GRID_CENTER_H + GUI_GRID_CENTER_Y;
-			w = 6 * GUI_GRID_CENTER_W;
-			h = 1 * GUI_GRID_CENTER_H;
-			text = "INDEP tickets"; //--- ToDo: Localize;
-		};
-		class CivLabel: RscText
-		{
-			idc = IDC_RESPAWN_TICKETS_CIVLABEL;
-			x = 13 * GUI_GRID_CENTER_W + GUI_GRID_CENTER_X;
-			y = 11 * GUI_GRID_CENTER_H + GUI_GRID_CENTER_Y;
-			w = 6 * GUI_GRID_CENTER_W;
-			h = 1 * GUI_GRID_CENTER_H;
-			text = "CIV tickets"; //--- ToDo: Localize;
-		};
-		////////////////////////////////////////////////////////
-		// GUI EDITOR OUTPUT END
-		////////////////////////////////////////////////////////
-	};
+			class controls {
+
+				class BluforInput: RscEdit
+				{
+					idc = IDC_RESPAWN_TICKETS_BLUFORINPUT;
+					h = POS_H(1);
+					w = POS_W(3);
+					x = POS_X(13);
+					y = POS_Y(0);
+				};
+				class OpforInput: RscEdit
+				{
+					idc = IDC_RESPAWN_TICKETS_OPFORINPUT;
+					h = POS_H(1);
+					w = POS_W(3);
+					x = POS_X(13);
+					y = POS_Y(2);
+				};
+				class IndepInput: RscEdit
+				{
+					idc = IDC_RESPAWN_TICKETS_INDEPINPUT;
+					h = POS_H(1);
+					w = POS_W(3);
+					x = POS_X(13);
+					y = POS_Y(4);
+				};
+				class CivInput: RscEdit
+				{
+					idc = IDC_RESPAWN_TICKETS_CIVINPUT;
+					h = POS_H(1);
+					w = POS_W(3);
+					x = POS_X(13);
+					y = POS_Y(6);
+				};
+				class BluforLabel: RscText
+				{
+					idc = IDC_RESPAWN_TICKETS_BLUFORLABEL;
+					h = POS_H(1);
+					w = POS_W(9);
+					x = POS_X(6.5);
+					y = POS_Y(0);
+					text = "BLUFOR tickets"; //--- ToDo: Localize;
+				};
+				class OpforLabel: RscText
+				{
+					idc = IDC_RESPAWN_TICKETS_OPFORLABEL;
+					h = POS_H(1);
+					w = POS_W(9);
+					x = POS_X(6.5);
+					y = POS_Y(2);
+					text = "OPFOR tickets"; //--- ToDo: Localize;
+				};
+				class IndepLabel: RscText
+				{
+					idc = IDC_RESPAWN_TICKETS_INDEPLABEL;
+					h = POS_H(1);
+					w = POS_W(9);
+					x = POS_X(6.5);
+					y = POS_Y(4);
+					text = "INDEP tickets"; //--- ToDo: Localize;
+				};
+				class CivLabel: RscText
+				{
+					idc = IDC_RESPAWN_TICKETS_CIVLABEL;
+					h = POS_H(1);
+					w = POS_W(9);
+					x = POS_X(6.5);
+					y = POS_Y(6);
+					text = "CIV tickets"; //--- ToDo: Localize;
+				};
+			};
+        };
+        class ButtonOK: RscButtonMenuOK {
+			idc = IDC_OK;
+			h = POS_H(1);
+			w = POS_W(5);
+			x = POS_X(21.5);
+			y = POS_Y(6);
+        };
+        class ButtonCancel: RscButtonMenuCancel {
+			idc = IDC_CANCEL;
+			h = POS_H(1);
+			w = POS_W(5);
+			x = POS_X(6.5);
+			y = POS_Y(6);
+        };
+    };
 };
 
 

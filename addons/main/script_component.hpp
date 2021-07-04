@@ -7,9 +7,24 @@
 #define POS_W(N) ((N) * GUI_GRID_W)
 #define POS_H(N) ((N) * GUI_GRID_H)
 
+//colour defines 
+#define COLOR_BACKGROUND_SETTING {1,1,1,0.2}
+
+//IDC for the gui - Cannot change this as the initial display pos from ZEN depends on the same three defines
+#define IDC_TITLE 10
+#define IDC_BACKGROUND 20
+#define IDC_CONTENT 30
+
+#define IDC_TITLE_GROUP 		1540
+#define IDC_TITLE_GROUP_LEADER	1541
+#define IDC_LIST       			1543
+#define IDC_BTN_SEARCH 			1546
+#define IDC_SEARCH_BAR 			1547
+#define IDC_WEIGHT	   			1548
+
+//IDC for RscRespawnTickets
 #define IDC_OK 1
 #define IDC_CANCEL 2
-#define IDD_RESPAWN_TICKETS 8000
 #define IDC_RESPAWN_TICKETS_BACKGROUND -1
 #define IDC_RESPAWN_TICKETS_TITLE -1
 #define IDC_RESPAWN_TICKETS_BLUFORINPUT 8001
