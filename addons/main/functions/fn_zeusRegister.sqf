@@ -63,7 +63,7 @@ private _wait = [player] spawn
 	private _contextActionList = [
 	    //AttachTo action
 	    [
-	        [QGVAR(AttachTo), "Attach To", ["", [1, 1, 1, 1]], {[_hoveredEntity] call timberZA_main_fnc_attachTo}, {!isNull _hoveredEntity}] call zen_context_menu_fnc_createAction,
+	        [QGVAR(AttachTo), "Attach To", "\a3\modules_f\data\portraitmodule_ca.paa", {[_hoveredEntity] call timberZA_main_fnc_attachTo}, {!isNull _hoveredEntity}] call zen_context_menu_fnc_createAction,
             [],
 	        0
 	    ]
