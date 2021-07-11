@@ -194,3 +194,50 @@ Author:
 #define GUI_THEME_ALPHA "(profileNamespace getVariable ['GUI_BCG_RGB_A',0.8])"
 
 #define GUI_THEME_COLOR {GUI_THEME_RGB_R,GUI_THEME_RGB_G,GUI_THEME_RGB_B,GUI_THEME_ALPHA}
+
+/* -------------------------------------------
+Macros: IS_x()
+    Checking the data types of variables.
+    IS_ARRAY() - Array
+    IS_BOOL() - Boolean
+    IS_BOOLEAN() - UI display handle(synonym for <IS_BOOL()>)
+    IS_CODE() - Code block (i.e a compiled function)
+    IS_CONFIG() - Configuration
+    IS_CONTROL() - UI control handle.
+    IS_DISPLAY() - UI display handle.
+    IS_FUNCTION() - A compiled function (synonym for <IS_CODE()>)
+    IS_GROUP() - Group.
+    IS_INTEGER() - Is a number a whole number?
+    IS_LOCATION() - World location.
+    IS_NUMBER() - A floating point number (synonym for <IS_SCALAR()>)
+    IS_OBJECT() - World object.
+    IS_SCALAR() - Floating point number.
+    IS_SCRIPT() - A script handle (as returned by execVM and spawn commands).
+    IS_SIDE() - Game side.
+    IS_STRING() - World object.
+    IS_TEXT() - Structured text.
+Parameters:
+    VARIABLE - Variable to check if it is of a particular type [Any, not nil]
+Author:
+    Spooner
+------------------------------------------- */
+#define IS_META_SYS(VAR,TYPE) (if (isNil {VAR}) then {false} else {(VAR) isEqualType TYPE})
+#define IS_ARRAY(VAR)    IS_META_SYS(VAR,[])
+#define IS_BOOL(VAR)     IS_META_SYS(VAR,false)
+#define IS_CODE(VAR)     IS_META_SYS(VAR,{})
+#define IS_CONFIG(VAR)   IS_META_SYS(VAR,configNull)
+#define IS_CONTROL(VAR)  IS_META_SYS(VAR,controlNull)
+#define IS_DISPLAY(VAR)  IS_META_SYS(VAR,displayNull)
+#define IS_GROUP(VAR)    IS_META_SYS(VAR,grpNull)
+#define IS_OBJECT(VAR)   IS_META_SYS(VAR,objNull)
+#define IS_SCALAR(VAR)   IS_META_SYS(VAR,0)
+#define IS_SCRIPT(VAR)   IS_META_SYS(VAR,scriptNull)
+#define IS_SIDE(VAR)     IS_META_SYS(VAR,west)
+#define IS_STRING(VAR)   IS_META_SYS(VAR,"STRING")
+#define IS_TEXT(VAR)     IS_META_SYS(VAR,text "")
+#define IS_LOCATION(VAR) IS_META_SYS(VAR,locationNull)
+
+#define IS_BOOLEAN(VAR)  IS_BOOL(VAR)
+#define IS_FUNCTION(VAR) IS_CODE(VAR)
+#define IS_INTEGER(VAR)  (if (IS_SCALAR(VAR)) then {floor (VAR) == (VAR)} else {false})
+#define IS_NUMBER(VAR)   IS_SCALAR(VAR)
