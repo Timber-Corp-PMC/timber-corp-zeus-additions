@@ -56,7 +56,7 @@ _ctrlButtonOK ctrlAddEventHandler ["ButtonClick", {
 		private _input = _display displayCtrl _controlIDC;
 
 		if (!isNil QUOTE(_ticketCount)) then {
-			missionNamespace setVariable [_variableName, parseNumber ctrlText _input];
+			missionNamespace setVariable [_variableName, parseNumber ctrlText _input, true];
 		};
 	} forEach [
 		[QGVAR(BluforTicketCount), IDC_RESPAWN_TICKETS_BLUFORINPUT],

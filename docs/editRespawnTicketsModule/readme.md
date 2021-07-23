@@ -44,19 +44,19 @@ missionNamespace setVariable ["timberZA_main_BluforTicketCount", 100];
         switch (side _unit) do {
             case west : {
                 private _bluforTicketCount = missionNamespace getVariable ["timberZA_main_BluforTicketCount", 0];
-                missionNamespace setVariable ["timberZA_main_BluforTicketCount", _bluforTicketCount - 1];
+                missionNamespace setVariable ["timberZA_main_BluforTicketCount", _bluforTicketCount - 1, true];
             };
             case east : {
                 private _opforTicketCount = missionNamespace getVariable ["timberZA_main_OpforTicketCount", 0];
-                missionNamespace setVariable ["timberZA_main_OpforTicketCount", _opforTicketCount - 1];
+                missionNamespace setVariable ["timberZA_main_OpforTicketCount", _opforTicketCount - 1, true];
             };
             case independent : {
                 private _indepTicketCount = missionNamespace getVariable ["timberZA_main_IndepTicketCount", 0];
-                missionNamespace setVariable ["timberZA_main_IndepTicketCount", _indepTicketCount - 1];
+                missionNamespace setVariable ["timberZA_main_IndepTicketCount", _indepTicketCount - 1, true];
             };
             case civilian : {
                 private _civilianTicketCount = missionNamespace getVariable ["timberZA_main_CivilianTicketCount", 0];
-                missionNamespace setVariable ["timberZA_main_CivilianTicketCount", _civilianTicketCount - 1];
+                missionNamespace setVariable ["timberZA_main_CivilianTicketCount", _civilianTicketCount - 1, true];
             };
         };
     }];
