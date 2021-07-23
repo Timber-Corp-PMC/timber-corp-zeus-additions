@@ -32,13 +32,13 @@ private _wait = [player] spawn
 		private _bluforTicketCount = missionNamespace getVariable QGVAR(BluforTicketCount);
 		private _opforTicketCount = missionNamespace getVariable QGVAR(OpforTicketCount);
 		private _indepTicketCount = missionNamespace getVariable QGVAR(IndepTicketCount);
-		private _civilianTicketCount = missionNamespace getVariable QGVAR(CivilianforTicketCount);
+		private _civilianTicketCount = missionNamespace getVariable QGVAR(CivilianTicketCount);
 
 		private _respawnSystemUsed = (
 			!isNil QUOTE(_bluforTicketCount)
-			|| !isNil QUOTE(OpforTicketCount)
-			|| !isNil QUOTE(IndepTicketCount)
-			|| !isNil QUOTE(CivilianforTicketCount)
+			|| !isNil QUOTE(_opforTicketCount)
+			|| !isNil QUOTE(_indepTicketCount)
+			|| !isNil QUOTE(_civilianTicketCount)
 		);
 		_respawnSystemUsed;
 	};
