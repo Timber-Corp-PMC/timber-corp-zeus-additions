@@ -36,9 +36,9 @@ private _wait = [player] spawn
 
 		private _respawnSystemUsed = (
 			!isNil QUOTE(_bluforTicketCount)
-			|| !isNil QUOTE(OpforTicketCount)
-			|| !isNil QUOTE(IndepTicketCount)
-			|| !isNil QUOTE(CivilianTicketCount)
+			|| !isNil QUOTE(_opforTicketCount)
+			|| !isNil QUOTE(_indepTicketCount)
+			|| !isNil QUOTE(_civilianTicketCount)
 		);
 		_respawnSystemUsed;
 	};
