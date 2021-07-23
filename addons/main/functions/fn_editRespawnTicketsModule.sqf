@@ -15,7 +15,7 @@ private _display = uiNamespace getVariable QGVAR(RscRespawnTicketsDisplay);
 private _bluforTicketCount = missionNamespace getVariable QGVAR(BluforTicketCount);
 private _opforTicketCount = missionNamespace getVariable QGVAR(OpforTicketCount);
 private _indepTicketCount = missionNamespace getVariable QGVAR(IndepTicketCount);
-private _civilianTicketCount = missionNamespace getVariable QGVAR(CivilianforTicketCount);
+private _civilianTicketCount = missionNamespace getVariable QGVAR(CivilianTicketCount);
 
 {
 	_x params ["_variableName", "_controlIDC"];
@@ -34,7 +34,7 @@ private _civilianTicketCount = missionNamespace getVariable QGVAR(CivilianforTic
 	[QGVAR(BluforTicketCount), IDC_RESPAWN_TICKETS_BLUFORINPUT],
 	[QGVAR(OpforTicketCount), IDC_RESPAWN_TICKETS_OPFORINPUT],
 	[QGVAR(IndepTicketCount), IDC_RESPAWN_TICKETS_INDEPINPUT],
-	[QGVAR(CivilianforTicketCount), IDC_RESPAWN_TICKETS_CIVINPUT]
+	[QGVAR(CivilianTicketCount), IDC_RESPAWN_TICKETS_CIVINPUT]
 ];
 
 private _ctrlButtonCancel = _display displayCtrl IDC_CANCEL;
@@ -62,7 +62,7 @@ _ctrlButtonOK ctrlAddEventHandler ["ButtonClick", {
 		[QGVAR(BluforTicketCount), IDC_RESPAWN_TICKETS_BLUFORINPUT],
 		[QGVAR(OpforTicketCount), IDC_RESPAWN_TICKETS_OPFORINPUT],
 		[QGVAR(IndepTicketCount), IDC_RESPAWN_TICKETS_INDEPINPUT],
-		[QGVAR(CivilianforTicketCount), IDC_RESPAWN_TICKETS_CIVINPUT]
+		[QGVAR(CivilianTicketCount), IDC_RESPAWN_TICKETS_CIVINPUT]
 	];
 
 	_display closeDisplay IDC_OK;
