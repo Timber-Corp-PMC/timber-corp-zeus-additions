@@ -25,6 +25,8 @@
 //IDC for RscRespawnTickets
 #define IDC_OK 1
 #define IDC_CANCEL 2
+
+//Respawn tickets
 #define IDC_RESPAWN_TICKETS_BACKGROUND -1
 #define IDC_RESPAWN_TICKETS_TITLE -1
 #define IDC_RESPAWN_TICKETS_BLUFORINPUT 8001
@@ -35,6 +37,12 @@
 #define IDC_RESPAWN_TICKETS_OPFORLABEL -1
 #define IDC_RESPAWN_TICKETS_INDEPLABEL -1
 #define IDC_RESPAWN_TICKETS_CIVLABEL -1
+
+//Respawn position
+#define IDC_RESPAWN_POSITION_NAME_LABEL -1
+#define IDC_RESPAWN_POSITION_NAME 8101
+#define IDC_RESPAWN_POSITION_SIDE_LABEL -1
+#define IDC_RESPAWN_POSITION_SIDE 8102
 
 #include "\x\timberZA\addons\main\script_mod.hpp"
 #include "\x\timberZA\addons\main\script_macros.hpp"

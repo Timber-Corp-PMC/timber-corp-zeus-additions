@@ -47,6 +47,8 @@ private _wait = [player] spawn
 		_moduleList pushBack ["Edit respawn tickets", {_this call timberZA_main_fnc_editRespawnTicketsModule}, "\a3\modules_f\data\portraitmodule_ca.paa"];
 	};
 
+	_moduleList pushBack ["Add respawn position", {_this call timberZA_main_fnc_addRespawnPositionModule}, "\a3\modules_f\data\portraitmodule_ca.paa"];
+
 	//registering ZEN custom modules
 	{
 		private _reg = 
