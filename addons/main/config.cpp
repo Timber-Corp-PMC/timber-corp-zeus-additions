@@ -1,6 +1,3 @@
-#include "\a3\ui_f\hpp\defineCommonGrids.inc"
-#include "\a3\ui_f\hpp\defineDIKCodes.inc"
-#include "\a3\ui_f_curator\ui\defineResinclDesign.inc"
 #include "script_component.hpp"
 
 class CfgPatches {
@@ -9,7 +6,7 @@ class CfgPatches {
         units[] = {};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
-        requiredAddons[] = {"zen_custom_modules", "A3_Modules_F", "A3_Modules_F_Curator"};
+        requiredAddons[] = {"zen_custom_modules", "A3_Modules_F", "A3_Modules_F_Curator", "3den"};
         author = CSTRING(Author);
         url = CSTRING(URL);
         VERSION_CONFIG;
@@ -27,7 +24,9 @@ class CfgFactionClasses
 
 class CfgFunctions
 {
-	#include "cfgFunctions.hpp"
+	#include "CfgFunctions.hpp"
 };
 
+#include "CfgEventHandlers.hpp"
+#include "Display3DEN.hpp"
 #include "ui.hpp"

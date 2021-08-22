@@ -1,13 +1,13 @@
 #include "script_component.hpp"
 
+//only load for zeus
+if (!hasInterface) exitWith {};
+
 private _hasZen = isClass (configFile >> "CfgPatches" >> "zen_custom_modules");
 if !(_hasZen) exitWith
 {
     diag_log Format ["******CBA and/or ZEN not detected. They are required for timberZA"];
 };
-
-//only load for zeus
-if (!hasInterface) exitWith {};
 
 //spawn script to register zen modules
 private _wait = [player] spawn
