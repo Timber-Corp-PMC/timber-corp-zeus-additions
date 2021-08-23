@@ -5,10 +5,11 @@ if (is3DEN) then {
         params ["_dialogResult", "_arguments"];
 
         //Get parameter from dialog inputs and arguments passed
-        _dialogResult params ["_amountPerPlayer", "_onlyMan", "_onlyPlayable", "_boxType"];
+        _dialogResult params ["_amountPerPlayer", "_onlyMan", "_onlyPlayable", "_includesMedical", "_boxType"];
         _arguments params ["_units"];
 
-        private _ammoList = [];
+        private _magazineList = [];
+        private _itemsList = [];
         private _unitCount = 0;
 
         //Function do filter out units
@@ -26,14 +27,32 @@ if (is3DEN) then {
             true;
         };
 
+        private _itemsBlackList = ["Medikit", "FirstAidKit"];
+
         // run though all selected units
         {
             if ([_x, _onlyMan, _onlyPlayable] call _filter) then {
-                // get all magazines from unit
-                private _mags = magazineCargo _x;
+                private _allItems = itemsWithMagazines _x;
 
-                // append to array
-                _ammoList append _mags;
+                {
+                    if (_x in _itemsBlackList) then {
+                        continue;
+                    };
+
+                    if (isClass (configfile >> "CfgMagazines" >> _x)) then {
+                        _magazineList pushBackUnique _x;
+                        continue;
+                    };
+
+                    if (_includesMedical) then {
+                        private _addons = configSourceAddonList (configFile >> "CfgWeapons" >> _x);
+                        if ("ace_medical_treatment" in _addons) then {
+                            _itemsList pushBackUnique _x;
+                            continue;
+                        };
+                    };
+
+                } forEach _allItems;
 
                 // increment players, could get it from playercount, but we are here anyway and can sort zeus out this way
                 _unitCount = _unitCount + 1;
@@ -46,29 +65,34 @@ if (is3DEN) then {
         };
 
         // got all mags, now get rid of duplicates
-        private _ammoList = _ammoList arrayIntersect _ammoList;
+        private _magazineList = _magazineList arrayIntersect _magazineList;
 
         // add amount
-        private _addAmount = _unitCount * _amountPerPlayer;
+        private _addAmount = _unitCount * (round _amountPerPlayer);
 
         // spawn container
         private _container = create3DENEntity  ["Object", _boxType, screenToWorld [0.5,0.5], true];
         private _magazines = [];
         private _magazinesAmount = [];
+        private _items = [];
+        private _itemsAmmount = [];
 
-        // go through all mags, and add them to container based on zeus amount set multiplied with player count
         {
-            // add to container
             _magazines pushBack _x;
             _magazinesAmount pushBack _addAmount;
-        } forEach _ammoList;
+        } forEach _magazineList;
+
+        {
+            _items pushBack _x;
+            _itemsAmmount pushBack _addAmount;
+        } forEach _itemsList;
 
         private _value = str
         [
           [
             [[], []],
             [_magazines, _magazinesAmount],
-            [[], []],
+            [_items, _itemsAmmount],
             [[], []]
           ],
           false
@@ -89,7 +113,7 @@ if (is3DEN) then {
         [
             [
                 "SLIDER",
-                "The result will be => selected units count * magazine count per player",
+                ["Ammount per unit", "The result will be => selected units count * magazine count per player"],
                 [1,50,5,0], //1 to 50, default 5 and showing 0 decimal
                 true
             ],
@@ -102,6 +126,12 @@ if (is3DEN) then {
             [
                 "CHECKBOX",
                 ["Only playable", "Take only playable units into account"],
+                [true],
+                true
+            ],
+            [
+                "CHECKBOX",
+                ["Includes medicals", "Add medicals items too"],
                 [true],
                 true
             ],
