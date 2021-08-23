@@ -1,0 +1,13 @@
+class ADDON
+{
+	class GVAR(Main)
+	{
+		file = "\x\timberZA\addons\main\functions";
+		class zeusRegister { postInit = 1; };
+		class preloadEden {};
+		class createDisplay {};
+		class editRespawnTicketsModule {};
+		class createSupplyBox {};
+		class attachTo {};
+	};
+};

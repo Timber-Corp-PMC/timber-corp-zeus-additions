@@ -37,3 +37,27 @@ class RscCheckBox;
 class RscBackground;
 class RscTitle;
 class RscTitleText;
+
+//ZEN UI classes
+class zen_common_RscEdit;
+class zen_common_RscLabel;
+
+class zen_common_RscDisplay {
+    class controls {
+        class Title;
+        class Background;
+        class Content;
+        class ButtonOK;
+        class ButtonCancel;
+    }
+};
+
+class GVAR(RscDisplay): zen_common_RscDisplay {
+    class controls: controls {
+        class Title: Title {};
+        class Background: Background {};
+        class Content: Content {};
+        class ButtonOK: ButtonOK {};
+        class ButtonCancel: ButtonCancel {};
+    };
+};
