@@ -1,6 +1,6 @@
 class GVAR(RscRespawnTickets) : GVAR(RscDisplay)
 {
-	onLoad = "uiNamespace setVariable ['timberZA_main_RscRespawnTicketsDisplay',_this select 0];";
+	onLoad = "uiNamespace setVariable ['timberZA_zeus_RscRespawnTicketsDisplay', _this select 0];";
 	movingEnable = 1;
 
 	class controls : controls {

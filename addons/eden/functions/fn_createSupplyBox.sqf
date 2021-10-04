@@ -151,5 +151,5 @@ if (is3DEN) then {
         [
             get3DENSelected "object"
         ]
-    ] call FUNC(createDisplay);
+    ] call EFUNC(main,createDisplay);
 };

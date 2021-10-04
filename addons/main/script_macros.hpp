@@ -1,243 +1,60 @@
-/*
-    Header: script_macros_common.hpp
+#include "\x\cba\addons\main\script_macros_common.hpp"
 
-    Description:
-        A general set of useful macro functions for use by CBA itself or by any module that uses CBA.
+#include "\a3\ui_f\hpp\defineCommonGrids.inc"
+#include "\a3\ui_f\hpp\defineDIKCodes.inc"
+#include "\a3\ui_f_curator\ui\defineResinclDesign.inc"
 
-    Authors:
-        Sickboy <sb_at_dev-heaven.net> and Spooner
-*/
+#define DFUNC(var1) TRIPLES(ADDON,fnc,var1)
+#define DEFUNC(var1,var2) TRIPLES(DOUBLES(PREFIX,var1),fnc,var2)
 
-/* ****************************************************
- New - Should be exported to general addon
- Aim:
-   - Simplify (shorten) the amount of characters required for repetitive tasks
-   - Provide a solid structure that can be dynamic and easy editable (Which sometimes means we cannot adhere to Aim #1 ;-)
-     An example is the path that is built from defines. Some available in this file, others in mods and addons.
+//gui defines - Using same approach as ZEN for gui styling
+#define POS_X(N) ((N) * GUI_GRID_W + GUI_GRID_CENTER_X)
+#define POS_Y(N) ((N) * GUI_GRID_H + GUI_GRID_CENTER_Y)
+#define POS_W(N) ((N) * GUI_GRID_W)
+#define POS_H(N) ((N) * GUI_GRID_H)
 
- Follows  Standard:
-   Object variables: PREFIX_COMPONENT
-   Main-object variables: PREFIX_main
-   Paths: MAINPREFIX\PREFIX\SUBPREFIX\COMPONENT\SCRIPTNAME.sqf
-   e.g: x\six\addons\sys_menu\fDate.sqf
+//colour defines
+#define COLOR_BACKGROUND_SETTING {1,1,1,0.2}
 
- Usage:
-   define PREFIX and COMPONENT, then include this file
-   (Note, you could have a main addon for your mod, define the PREFIX in a macros.hpp,
-   and include this script_macros_common.hpp file.
-   Then in your addons, add a component.hpp, define the COMPONENT,
-   and include your mod's script_macros.hpp
-   In your scripts you can then include the addon's component.hpp with relative path)
+//IDC for the gui - Cannot change this as the initial display pos from ZEN depends on the same three defines
+#define IDC_TITLE 10
+#define IDC_BACKGROUND 20
+#define IDC_CONTENT 30
 
- TODO:
-   - Try only to use 1 string type " vs '
-   - Evaluate double functions, and simplification
-   - Evaluate naming scheme; current = prototype
-   - Evaluate "Debug" features..
-   - Evaluate "create mini function per precompiled script, that will load the script on first usage, rather than on init"
-   - Also saw "Namespace" typeName, evaluate which we need :P
-   - Single/Multi player gamelogics? (Incase of MP, you would want only 1 gamelogic per component, which is pv'ed from server, etc)
- */
+#define IDC_ATTRIBUTE_GROUP      400
+#define IDC_ATTRIBUTE_LABEL      401
+#define IDC_ATTRIBUTE_BACKGROUND 402
+#define IDC_ATTRIBUTE_COMBO      403
+#define IDC_ATTRIBUTE_EDIT       404
+#define IDC_ATTRIBUTE_SLIDER     405
+#define IDC_ATTRIBUTE_TOOLBOX    406
+#define IDC_ATTRIBUTE_MODE       407
 
-#ifndef MAINPREFIX
-    #define MAINPREFIX x
-#endif
+#define IDC_ROW_GROUP 1000
+#define IDC_ROW_LABEL 1001
+#define IDC_ROW_CHECKBOX 1002
+#define IDC_ROW_COMBO 1003
+#define IDC_ROW_EDIT 1004
+#define IDC_ROW_SLIDER 1005
+#define IDC_ROW_TOOLBOX 1006
+#define IDC_ROW_SIDES 1007
+#define IDC_ROW_OWNERS 1008
+#define IDC_ROW_COLOR_PREVIEW 1009
+#define IDC_ROW_COLOR_RED 1010
+#define IDC_ROW_COLOR_RED_EDIT 1011
+#define IDC_ROW_COLOR_GREEN 1012
+#define IDC_ROW_COLOR_GREEN_EDIT 1013
+#define IDC_ROW_COLOR_BLUE 1014
+#define IDC_ROW_COLOR_BLUE_EDIT 1015
+#define IDC_ROW_COLOR_ALPHA 1016
+#define IDC_ROW_COLOR_ALPHA_EDIT 1017
+#define IDC_ROW_VECTOR_X 1018
+#define IDC_ROW_VECTOR_Y 1019
+#define IDC_ROW_VECTOR_Z 1020
 
-#ifndef SUBPREFIX
-    #define SUBPREFIX addons
-#endif
-
-#ifndef MAINLOGIC
-    #define MAINLOGIC main
-#endif
-
-#define ADDON DOUBLES(PREFIX,COMPONENT)
-#define MAIN_ADDON DOUBLES(PREFIX,main)
-
-/* -------------------------------------------
-Macro: VERSION_CONFIG
-    Define CBA Versioning System config entries.
-
-    VERSION should be a floating-point number (1 separator).
-    VERSION_STR is a string representation of the version.
-    VERSION_AR is an array representation of the version.
-
-    VERSION must always be defined, otherwise it is 0.
-    VERSION_STR and VERSION_AR default to VERSION if undefined.
-
-Parameters:
-    None
-
-Example:
-    (begin example)
-        #define VERSION 1.0
-        #define VERSION_STR 1.0.1
-        #define VERSION_AR 1,0,1
-
-        class CfgPatches {
-            class MyMod_main {
-                VERSION_CONFIG;
-            };
-        };
-    (end)
-
-Author:
-    ?, Jonpas
-------------------------------------------- */
-#ifndef VERSION
-    #define VERSION 0
-#endif
-
-#ifndef VERSION_STR
-    #define VERSION_STR VERSION
-#endif
-
-#ifndef VERSION_AR
-    #define VERSION_AR VERSION
-#endif
-
-#ifndef VERSION_CONFIG
-    #define VERSION_CONFIG version = VERSION; versionStr = QUOTE(VERSION_STR); versionAr[] = {VERSION_AR}
-#endif
-
-/* -------------------------------------------
-Group: General
-------------------------------------------- */
-
-// *************************************
-// Internal Functions
-#define DOUBLES(var1,var2) var1##_##var2
-#define TRIPLES(var1,var2,var3) var1##_##var2##_##var3
-#define QUOTE(var1) #var1
-
-/* -------------------------------------------
-Macro: GVAR()
-    Get full variable identifier for a global variable owned by this component.
-
-Parameters:
-    VARIABLE - Partial name of global variable owned by this component [Any].
-
-Example:
-    (begin example)
-        GVAR(frog) = 12;
-        // In SPON_FrogDancing component, equivalent to SPON_FrogDancing_frog = 12
-    (end)
-
-Author:
-    Sickboy
-------------------------------------------- */
-#define GVAR(var1) DOUBLES(ADDON,var1)
-#define EGVAR(var1,var2) TRIPLES(PREFIX,var1,var2)
-#define QGVAR(var1) QUOTE(GVAR(var1))
-#define QEGVAR(var1,var2) QUOTE(EGVAR(var1,var2))
-#define QQGVAR(var1) QUOTE(QGVAR(var1))
-#define QQEGVAR(var1,var2) QUOTE(QEGVAR(var1,var2))
-
-#define FUNC(var1) TRIPLES(ADDON,fnc,var1)
-#define QFUNC(var1) QUOTE(FUNC(var1))
-/* -------------------------------------------
-Macro: SCRIPT()
-    Sets name of script (relies on PREFIX and COMPONENT values being #defined).
-    Define 'SKIP_SCRIPT_NAME' to skip adding scriptName.
-
-Parameters:
-    NAME - Name of script [Indentifier]
-
-Example:
-    (begin example)
-        SCRIPT(eradicateMuppets);
-    (end)
-
-Author:
-    Spooner
-------------------------------------------- */
-#ifndef SKIP_SCRIPT_NAME
-    #define SCRIPT(NAME) scriptName 'PREFIX\COMPONENT\NAME'
-#else
-    #define SCRIPT(NAME) /* nope */
-#endif
-
-/* -------------------------------------------
-Macro: xSTRING()
-    Get full string identifier from a stringtable owned by this component.
-
-Parameters:
-    VARIABLE - Partial name of global variable owned by this component [Any].
-
-Example:
-    ADDON is CBA_Balls.
-    (begin example)
-        // Localized String (localize command must still be used with it)
-        LSTRING(Example); // STR_CBA_Balls_Example;
-        // Config String (note the $)
-        CSTRING(Example); // $STR_CBA_Balls_Example;
-    (end)
-
-Author:
-    Jonpas
-------------------------------------------- */
-#ifndef STRING_MACROS_GUARD
-#define STRING_MACROS_GUARD
-    #define LSTRING(var1) QUOTE(TRIPLES(STR,ADDON,var1))
-    #define ELSTRING(var1,var2) QUOTE(TRIPLES(STR,DOUBLES(PREFIX,var1),var2))
-    #define CSTRING(var1) QUOTE(TRIPLES($STR,ADDON,var1))
-    #define ECSTRING(var1,var2) QUOTE(TRIPLES($STR,DOUBLES(PREFIX,var1),var2))
-
-    #define LLSTRING(var1) localize QUOTE(TRIPLES(STR,ADDON,var1))
-    #define LELSTRING(var1,var2) localize QUOTE(TRIPLES(STR,DOUBLES(PREFIX,var1),var2))
-#endif
-
-
-#define GUI_THEME_RGB_R "(profileNamespace getVariable ['GUI_BCG_RGB_R',0.13])"
-#define GUI_THEME_RGB_G "(profileNamespace getVariable ['GUI_BCG_RGB_G',0.54])"
-#define GUI_THEME_RGB_B "(profileNamespace getVariable ['GUI_BCG_RGB_B',0.21])"
-#define GUI_THEME_ALPHA "(profileNamespace getVariable ['GUI_BCG_RGB_A',0.8])"
-
-#define GUI_THEME_COLOR {GUI_THEME_RGB_R,GUI_THEME_RGB_G,GUI_THEME_RGB_B,GUI_THEME_ALPHA}
-
-/* -------------------------------------------
-Macros: IS_x()
-    Checking the data types of variables.
-    IS_ARRAY() - Array
-    IS_BOOL() - Boolean
-    IS_BOOLEAN() - UI display handle(synonym for <IS_BOOL()>)
-    IS_CODE() - Code block (i.e a compiled function)
-    IS_CONFIG() - Configuration
-    IS_CONTROL() - UI control handle.
-    IS_DISPLAY() - UI display handle.
-    IS_FUNCTION() - A compiled function (synonym for <IS_CODE()>)
-    IS_GROUP() - Group.
-    IS_INTEGER() - Is a number a whole number?
-    IS_LOCATION() - World location.
-    IS_NUMBER() - A floating point number (synonym for <IS_SCALAR()>)
-    IS_OBJECT() - World object.
-    IS_SCALAR() - Floating point number.
-    IS_SCRIPT() - A script handle (as returned by execVM and spawn commands).
-    IS_SIDE() - Game side.
-    IS_STRING() - World object.
-    IS_TEXT() - Structured text.
-Parameters:
-    VARIABLE - Variable to check if it is of a particular type [Any, not nil]
-Author:
-    Spooner
-------------------------------------------- */
-#define IS_META_SYS(VAR,TYPE) (if (isNil {VAR}) then {false} else {(VAR) isEqualType TYPE})
-#define IS_ARRAY(VAR)    IS_META_SYS(VAR,[])
-#define IS_BOOL(VAR)     IS_META_SYS(VAR,false)
-#define IS_CODE(VAR)     IS_META_SYS(VAR,{})
-#define IS_CONFIG(VAR)   IS_META_SYS(VAR,configNull)
-#define IS_CONTROL(VAR)  IS_META_SYS(VAR,controlNull)
-#define IS_DISPLAY(VAR)  IS_META_SYS(VAR,displayNull)
-#define IS_GROUP(VAR)    IS_META_SYS(VAR,grpNull)
-#define IS_OBJECT(VAR)   IS_META_SYS(VAR,objNull)
-#define IS_SCALAR(VAR)   IS_META_SYS(VAR,0)
-#define IS_SCRIPT(VAR)   IS_META_SYS(VAR,scriptNull)
-#define IS_SIDE(VAR)     IS_META_SYS(VAR,west)
-#define IS_STRING(VAR)   IS_META_SYS(VAR,"STRING")
-#define IS_TEXT(VAR)     IS_META_SYS(VAR,text "")
-#define IS_LOCATION(VAR) IS_META_SYS(VAR,locationNull)
-
-#define IS_BOOLEAN(VAR)  IS_BOOL(VAR)
-#define IS_FUNCTION(VAR) IS_CODE(VAR)
-#define IS_INTEGER(VAR)  (if (IS_SCALAR(VAR)) then {floor (VAR) == (VAR)} else {false})
-#define IS_NUMBER(VAR)   IS_SCALAR(VAR)
+#define IDC_TITLE_GROUP 		1540
+#define IDC_TITLE_GROUP_LEADER	1541
+#define IDC_LIST       			1543
+#define IDC_BTN_SEARCH 			1546
+#define IDC_SEARCH_BAR 			1547
+#define IDC_WEIGHT	   			1548

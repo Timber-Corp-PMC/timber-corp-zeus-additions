@@ -44,7 +44,7 @@ private _wait = [player] spawn
     };
 
     if (_respawnSystemUsed) then {
-        _moduleList pushBack ["Edit respawn tickets", {_this call timberZA_main_fnc_editRespawnTicketsModule}, "\a3\modules_f\data\portraitmodule_ca.paa"];
+        _moduleList pushBack ["Edit respawn tickets", {_this call EFUNC(zeus,editRespawnTicketsModule)}, "\a3\modules_f\data\portraitmodule_ca.paa"];
     };
 
     //registering ZEN custom modules
@@ -63,7 +63,7 @@ private _wait = [player] spawn
 	private _contextActionList = [
 	    //AttachTo action
 	    [
-	        [QGVAR(AttachTo), "Attach To", "\a3\modules_f\data\portraitmodule_ca.paa", {[_hoveredEntity] call timberZA_main_fnc_attachTo}, {!isNull _hoveredEntity}] call zen_context_menu_fnc_createAction,
+	        [QGVAR(AttachTo), "Attach To", "\a3\modules_f\data\portraitmodule_ca.paa", {[_hoveredEntity] call EFUNC(zeus,attachTo)}, {!isNull _hoveredEntity}] call zen_context_menu_fnc_createAction,
             [],
 	        0
 	    ]
