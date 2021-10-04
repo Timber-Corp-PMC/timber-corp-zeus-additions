@@ -5,5 +5,6 @@ class ADDON
 		file = "\x\timberZA\addons\eden\functions";
 		class preloadEden {};
 		class createSupplyBox {};
+		class switchUnitSide {};
 	};
 };
