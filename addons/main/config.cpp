@@ -10,6 +10,7 @@ class CfgPatches {
             "cba_main",
             "cba_xeh",
             "ace_common",
+            "ace_medical",
             "zen_custom_modules",
             "A3_Modules_F",
             "A3_Modules_F_Curator",

@@ -5,23 +5,23 @@ if (is3DEN) then {
         params ["_dialogResult", "_arguments"];
 
         //Get parameter from dialog inputs and arguments passed
-        _dialogResult params ["_amountPerPlayer", "_onlyMan", "_onlyPlayable", "_includesMedical", "_boxType"];
+        _dialogResult params ["_amountPerPlayer", "_onlyMan", "_onlyPlayable", "_includesMedical", "_vehicleType"];
         _arguments params ["_units"];
 
         private _ammoBox = [_units, _amountPerPlayer, _onlyMan, _onlyPlayable, _includesMedical] call FUNC(getAmmoBoxFromUnits);
 
         // spawn container
-        private _container = create3DENEntity  ["Object", _boxType, screenToWorld [0.5,0.5], true];
+        private _container = create3DENEntity  ["Object", _vehicleType, screenToWorld [0.5,0.5], true];
         _container set3DENAttribute ["ammoBox", _ammoBox];
 
         do3DENAction "MissionSave";
-        ["Supply crate placed", 0, 2, false] call BIS_fnc_3DENNotification;
+        ["Vehicle placed", 0, 2, false] call BIS_fnc_3DENNotification;
     };
 
-    private _ammoBoxesComboOptions = uiNamespace getVariable [QGVAR(ammoBoxesComboOptions), []];
+    private _vehiclesComboOptions = uiNamespace getVariable [QGVAR(vehiclesComboOptions), []];
 
-    if (count _ammoBoxesComboOptions isEqualTo 0) exitWith {
-        ["No ammo box found", 1, 2, false] call BIS_fnc_3DENNotification;
+    if (count _vehiclesComboOptions isEqualTo 0) exitWith {
+        ["No vehicles found", 1, 2, false] call BIS_fnc_3DENNotification;
     };
 
     [
@@ -53,10 +53,10 @@ if (is3DEN) then {
             ],
             [
                 "COMBO",
-                ["Box type", "Name of the box used"],
+                ["Vehicle type", "Name of the vehicle used"],
                 [
-                    _ammoBoxesComboOptions select 0,
-                    _ammoBoxesComboOptions select 1,
+                    _vehiclesComboOptions select 0,
+                    _vehiclesComboOptions select 1,
                     0
                 ],
                 true
