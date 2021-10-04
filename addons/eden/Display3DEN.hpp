@@ -8,8 +8,10 @@ class Display3DEN {
                 text="Timber corp";
                 items[] = {
                     QGVAR(CreateSupplyBox),
+                    QGVAR(CreateSupplyVehicle),
                     QGVAR(SwitchUnitSide)
                 };
+
                 picture = "\a3\3DEN\Data\Displays\Display3DEN\ToolBar\open_ca.paa";
                 value = 0;
             };
@@ -17,6 +19,13 @@ class Display3DEN {
             class GVAR(CreateSupplyBox) {
                 text="Create supply box";
                 action="[] call timberZA_eden_fnc_createSupplyBox";
+                conditionShow = "selected";
+                opensNewWindow = 1;
+            };
+
+            class GVAR(CreateSupplyVehicle) {
+                text="Create supply vehicle";
+                action="[] call timberZA_eden_fnc_createSupplyVehicle";
                 conditionShow = "selected";
                 opensNewWindow = 1;
             };

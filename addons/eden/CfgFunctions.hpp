@@ -6,5 +6,7 @@ class ADDON
 		class preloadEden {};
 		class createSupplyBox {};
 		class switchUnitSide {};
+		class createSupplyVehicle {};
+		class getAmmoBoxFromUnits {};
 	};
 };
