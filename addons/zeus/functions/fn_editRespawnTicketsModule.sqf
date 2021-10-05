@@ -2,8 +2,8 @@
 params [["_pos",[0,0,0],[[]],3], ["_unit",objNull,[objNull]]];
 
 //create display 
-if (!createDialog "timberZA_main_RscRespawnTickets") exitWith {
-	systemChat "Error opening dialog timberZA_main_RscRespawnTickets";
+if (!createDialog QGVAR(RscRespawnTickets)) exitWith {
+	systemChat "Error opening dialog GVAR(RscRespawnTickets)";
 };
 
 //get display
